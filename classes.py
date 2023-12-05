@@ -12,7 +12,6 @@ class Road:
         self.ax.add_patch(self.figure_y)
 
 
-# заранее создаём много машин и каждая может появиться с некоторой вероятностью
 class Car:
     def __init__(self, ax, x, y, color='blue'):
         self.rect = plt.Rectangle((x, y), 0.1, 0.07, color=color)
@@ -28,6 +27,8 @@ class Car:
                 x += v
             elif tr.get_circle_color() == 'red' and x < 0.17:
                 x += v
+            elif tr.get_circle_color() == 'yellow' and x < 0.17:
+                x += v/3                
             else:
                 self.stop = True
 
@@ -36,6 +37,8 @@ class Car:
                 x += v
             elif tr.get_circle_color() == 'red' and x > (1-0.17):
                 x += v
+            elif tr.get_circle_color() == 'yellow' and x < (1-0.17):
+                x += v/3                   
             else:
                 self.stop = True
 
@@ -63,8 +66,11 @@ class TrafficLight:
     def update(self):
         self.time += 0.1
         color1 = ''
-        if self.time % 6 < 3:
+        if self.time % 6 < 2.5:
             color1 = "green"
+            self.circle.set_facecolor(color1)
+        elif self.time % 6 < 3.5 and self.time % 6 > 2.5:
+            color1 = "yellow"
             self.circle.set_facecolor(color1)
         else:
             color1 = "red"

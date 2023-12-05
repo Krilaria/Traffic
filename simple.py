@@ -12,7 +12,6 @@ road = Road(ax)
 tr1 = TrafficLight(ax, 1)
 
 car1 = Car(ax, 0, 0.42, 'blue')
-# car11 = Car(ax, 0, 0.42, 'green')
 car2 = Car(ax, 0, 0.52, 'red')
 p1 = Pedestrian(ax, 0.35, 0.35)
 
@@ -24,7 +23,6 @@ def update(frame):
     global rest1
     car1.update(0.01, tr1)
     car2.update(-0.013, tr1)
-    # car11.update(0.011, tr1)
     tr1.update()
     p1.update(0.01, tr1)
     text.set_text(f' time: {time:.1f}, stop  {round(rest1/(2*time+00.1), 2)}')
